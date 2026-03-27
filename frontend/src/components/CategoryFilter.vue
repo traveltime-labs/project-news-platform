@@ -19,11 +19,11 @@ const categories: Array<{ value: NewsCategory | null; label: string }> = [
     <button
       v-for="cat in categories"
       :key="String(cat.value)"
-      class="rounded-full border px-3 py-1 text-sm font-medium transition-colors"
+      class="rounded-[20px] border px-[14px] py-[5px] text-xs transition-all duration-150"
       :class="
         newsStore.activeCategory === cat.value
-          ? 'border-primary bg-primary text-primary-foreground'
-          : 'border-border bg-background text-muted-foreground hover:border-primary hover:text-primary'
+          ? 'border-[rgba(108,99,255,0.4)] bg-[rgba(108,99,255,0.2)] font-medium text-[#a09aff]'
+          : 'border-white/12 bg-transparent text-white/40 hover:bg-white/5 hover:text-white/65'
       "
       @click="newsStore.setCategory(cat.value)"
     >

@@ -15,25 +15,27 @@ const navItems = [
 <template>
   <SidebarProvider>
     <AppSidebar />
-    <main class="m-4 w-full pb-24 md:pb-4">
-      <SidebarTrigger class="hidden md:flex" />
-      <div class="py-4">
+    <main class="flex min-h-svh w-full flex-col pb-20 md:pb-0">
+      <header class="sticky top-0 z-20 flex h-[53px] items-center border-b border-white/6 px-5 backdrop-blur-md">
+        <SidebarTrigger class="h-7 w-7" />
+      </header>
+      <div class="px-5 py-4">
         <slot />
       </div>
     </main>
 
     <!-- Mobile Bottom Nav -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 flex items-stretch justify-around border-t border-border bg-background md:hidden">
+    <nav class="fixed bottom-0 left-0 right-0 z-50 flex items-stretch justify-around border-t border-white/10 bg-[#0f0f1a]/95 backdrop-blur md:hidden">
       <RouterLink
         v-for="item in navItems"
         :key="item.title"
         :to="item.url"
-        class="flex flex-1 flex-col items-center justify-center gap-0.5 py-2.5 text-muted-foreground transition-colors"
-        :class="route.path.toLowerCase() === item.url.toLowerCase() ? 'text-foreground' : 'hover:text-foreground'"
+        class="flex flex-1 flex-col items-center justify-center gap-0.5 py-2.5 text-white/45 transition-colors"
+        :class="route.path.toLowerCase() === item.url.toLowerCase() ? 'text-[#c5c0ff]' : 'hover:text-white/80'"
       >
         <div
           class="flex h-7 w-7 items-center justify-center rounded-xl transition-colors"
-          :class="route.path.toLowerCase() === item.url.toLowerCase() ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : ''"
+          :class="route.path.toLowerCase() === item.url.toLowerCase() ? 'bg-[rgba(108,99,255,0.18)] text-[#c5c0ff]' : ''"
         >
           <component :is="item.icon" class="h-[17px] w-[17px]" />
         </div>

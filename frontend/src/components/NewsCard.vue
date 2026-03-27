@@ -29,11 +29,11 @@ const categoryLabels: Record<string, string> = {
 }
 
 const categoryColors: Record<string, string> = {
-  tech: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
-  world: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
-  finance: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-  ufo: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
-  taiwan: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+  ufo: 'bg-[rgba(108,99,255,0.18)] text-[#a09aff] border border-[rgba(108,99,255,0.3)]',
+  tech: 'bg-[rgba(55,138,221,0.18)] text-[#85b7eb] border border-[rgba(55,138,221,0.3)]',
+  taiwan: 'bg-[rgba(29,158,117,0.18)] text-[#5dcaa5] border border-[rgba(29,158,117,0.3)]',
+  finance: 'bg-[rgba(186,117,23,0.2)] text-[#ef9f27] border border-[rgba(186,117,23,0.35)]',
+  world: 'bg-[rgba(216,90,48,0.18)] text-[#f0997b] border border-[rgba(216,90,48,0.3)]',
 }
 
 function formatDate(iso: string) {
@@ -77,21 +77,21 @@ const displaySummary = () =>
 
 <template>
   <article
-    class="group flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-shadow hover:shadow-md"
+    class="flex h-full flex-col rounded-[12px] border border-white/8 bg-white/[0.04] p-[13px] transition-all duration-150 hover:border-white/15"
   >
     <!-- Header row: source + category + time + bookmark -->
     <div class="flex items-start justify-between gap-2">
-      <div class="flex flex-wrap items-center gap-1.5">
-        <span class="text-xs font-semibold text-muted-foreground">{{ news.source }}</span>
+      <div class="flex min-w-0 flex-wrap items-center gap-1.5">
+        <span class="max-w-[110px] truncate text-[10px] text-white/38">{{ news.source }}</span>
         <span
-          class="rounded-full px-2 py-0.5 text-[10px] font-medium"
+          class="rounded-[8px] px-[6px] py-[1px] text-[10px]"
           :class="categoryColors[news.category]"
         >
           {{ categoryLabels[news.category] }}
         </span>
       </div>
-      <div class="flex shrink-0 items-center gap-1">
-        <time class="text-xs text-muted-foreground">{{ formatDate(news.publishedAt) }}</time>
+      <div class="flex shrink-0 items-center gap-1.5">
+        <time class="text-[10px] text-white/22">{{ formatDate(news.publishedAt) }}</time>
         <HeartButton
           :bookmarked="bookmarksStore.isBookmarked(news.id)"
           :loading="isTogglingBookmark"
@@ -105,18 +105,18 @@ const displaySummary = () =>
       :href="news.url"
       target="_blank"
       rel="noopener noreferrer"
-      class="line-clamp-2 font-semibold leading-snug text-foreground transition-colors hover:text-primary"
+      class="mb-[7px] line-clamp-2 text-[12px] font-medium leading-[1.5] text-white/88 transition-colors duration-150 hover:text-[#a09aff]"
     >
       {{ displayTitle() }}
     </a>
 
     <!-- Summary -->
-    <p class="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+    <p class="line-clamp-4 flex-1 text-[11px] leading-[1.55] text-white/38">
       {{ displaySummary() }}
     </p>
 
     <!-- Footer: translate button + read full article -->
-    <div class="mt-auto flex items-center justify-between pt-1">
+    <div class="mt-[9px] flex items-center justify-between border-t border-white/7 pt-[9px]">
       <TranslateButton
         :news-id="news.id"
         :is-translating="isTranslating"
@@ -126,7 +126,7 @@ const displaySummary = () =>
         @toggle="showTranslated = !showTranslated"
       />
       <button
-        class="text-xs font-medium text-primary hover:underline"
+        class="text-[11px] font-medium text-[#8b85ff] transition-colors duration-150 hover:text-[#a09aff]"
         @click="emit('read', news)"
       >
         閱讀全文 →

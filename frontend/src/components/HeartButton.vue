@@ -12,15 +12,15 @@ const emit = defineEmits<{
 <template>
   <button
     :disabled="loading"
-    class="flex h-7 w-7 items-center justify-center rounded-full transition-colors hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-rose-950"
+    class="flex h-6 w-6 items-center justify-center rounded-full transition-all duration-150 hover:bg-white/6 disabled:cursor-not-allowed disabled:opacity-50"
     :aria-label="bookmarked ? '取消收藏' : '加入收藏'"
     @click.prevent="emit('toggle')"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      class="h-4 w-4 transition-colors"
-      :class="bookmarked ? 'fill-rose-500 stroke-rose-500' : 'fill-none stroke-muted-foreground hover:stroke-rose-400'"
+      class="h-[13px] w-[13px] transition-colors duration-150"
+      :class="bookmarked ? 'fill-[#f26b8a] stroke-[#f26b8a]' : 'fill-none stroke-white/30 hover:stroke-white/55'"
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"

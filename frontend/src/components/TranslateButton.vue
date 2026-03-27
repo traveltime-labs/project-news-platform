@@ -16,7 +16,7 @@ const emit = defineEmits<{
   <button
     v-if="!hasTranslation"
     :disabled="isTranslating"
-    class="inline-flex items-center gap-1 rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+    class="inline-flex items-center gap-1 rounded-md border border-white/10 bg-transparent px-2 py-[3px] text-[10px] text-white/22 transition-all duration-150 hover:bg-white/5 hover:text-white/40 disabled:cursor-not-allowed disabled:opacity-50"
     @click.prevent="emit('translate', newsId)"
   >
     <span
@@ -29,7 +29,7 @@ const emit = defineEmits<{
 
   <button
     v-else
-    class="inline-flex items-center gap-1 rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+    class="inline-flex items-center gap-1 rounded-md border border-white/10 bg-transparent px-2 py-[3px] text-[10px] text-white/22 transition-all duration-150 hover:bg-white/5 hover:text-white/40"
     @click.prevent="emit('toggle')"
   >
     {{ showTranslated ? '看原文' : '看譯文' }}

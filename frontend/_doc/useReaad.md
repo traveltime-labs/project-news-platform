@@ -209,27 +209,37 @@ python notify.py
 
 ## local 啟動方式
 
-1. 開前端（Vue 3）
-bashcd news-radar/frontend
+1. 前端
+bash
+```
+cd frontend
 npm install
 npm run dev
+```
 瀏覽器開 http://localhost:5173 就可以看到畫面。
 
 2. 開 Vercel Serverless Function（API）
 Vercel 有提供本地開發工具：
-bashnpm install -g vercel
-cd news-radar
+
+```bash
+npm install -g vercel
+cd frontend
 vercel dev
+```
 這樣 /api/news、/api/translate 等 endpoint 就會在本地跑起來，前端的請求會打到本地的 Serverless Function，不是線上環境。
 環境變數要建一個 .env.local：
+```
 envGOOGLE_SERVICE_ACCOUNT_EMAIL=xxx@xxx.iam.gserviceaccount.com
 GOOGLE_PRIVATE_KEY=-----BEGIN RSA PRIVATE KEY-----\n...
 GOOGLE_SHEET_ID=your_sheet_id
 OPENAI_API_KEY=sk-...
+```
 
 3. 模擬爬蟲
 不需要 GitHub Actions，直接在本地手動跑：
-bashcd news-radar/crawler
+```bash
+cd crawler
+```
 
 # 確認在 venv 裡
 source venv/bin/activate
@@ -241,8 +251,8 @@ python setup_sheets.py
 python main.py
 設定環境變數的方式有兩種：
 方式一：建 .env 檔 + 用 python-dotenv 讀取
-```
-bashpip install python-dotenv
+```bash
+pip install python-dotenv
 ```
 在 crawler/ 建 .env：
 ```
@@ -257,6 +267,7 @@ TELEGRAM_CHAT_ID=xxx
 pythonfrom dotenv import load_dotenv
 load_dotenv()
 ```
+
 方式二：直接在終端機設定（臨時用）
 ```
 bashexport GOOGLE_SHEET_ID=your_sheet_id
@@ -268,8 +279,16 @@ python main.py
 
 ## 整體本地開發流程
 ```
-terminal 1：cd crawler && python main.py   ← 手動觸發爬蟲
-terminal 2：vercel dev                      ← API server
-terminal 3：cd frontend && npm run dev      ← 前端
-三個 terminal 同時跑，就跟正式環境幾乎一樣了。
-建議先從爬蟲開始測，確認資料寫進 Sheets 後，再啟動前端看畫面。要繼續設定 Google Cloud Service Account 嗎？
+後端
+cd crawler
+python -m venv .venv
+source .venv/bin/activate
+python main.py   ← 手動觸發爬蟲
+
+前端
+cd frontend
+vercel dev                      ← API server
+
+前端
+cd frontend && npm run dev      ← 前端
+```
